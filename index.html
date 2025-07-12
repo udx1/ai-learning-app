@@ -1,39 +1,328 @@
-{
-  "package.json": {
-    "name": "ai-learning-app",
-    "version": "1.0.0",
-    "private": true,
-    "dependencies": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "react-scripts": "5.0.1",
-      "lucide-react": "^0.263.1"
-    },
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-      "extends": [
-        "react-app"
-      ]
-    },
-    "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    }
-  },
-  "public/index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta name=\"theme-color\" content=\"#000000\" />\n    <meta name=\"description\" content=\"AI Learning App for Beginners\" />\n    <title>AI for Beginners</title>\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n  </head>\n  <body>\n    <noscript>You need to enable JavaScript to run this app.</noscript>\n    <div id=\"root\"></div>\n  </body>\n</html>",
-  "src/index.js": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);",
-  "src/App.js": "import React, { useState, useEffect } from 'react';\nimport { ChevronRight, ChevronLeft, Play, Brain, MessageCircle, Eye, Zap, BookOpen, CheckCircle } from 'lucide-react';\n\nconst App = () => {\n  const [currentLesson, setCurrentLesson] = useState(0);\n  const [completedLessons, setCompletedLessons] = useState(new Set());\n  const [chatInput, setChatInput] = useState('');\n  const [chatMessages, setChatMessages] = useState([]);\n  const [isTyping, setIsTyping] = useState(false);\n\n  const lessons = [\n    {\n      id: 0,\n      title: \"What is AI?\",\n      icon: <Brain className=\"w-6 h-6\" />,\n      content: {\n        explanation: \"Artificial Intelligence (AI) is like giving computers the ability to think and learn, similar to how humans do. Imagine teaching a computer to recognize your voice, understand what you're saying, and respond helpfully.\",\n        visual: \"🧠 + 💻 = 🤖\",\n        example: \"When you ask Siri about the weather, that's AI understanding your speech and finding the answer for you!\"\n      }\n    },\n    {\n      id: 1,\n      title: \"How AI Learns\",\n      icon: <BookOpen className=\"w-6 h-6\" />,\n      content: {\n        explanation: \"AI learns by looking at lots of examples, just like how you learned to recognize cats by seeing many cats. The more examples it sees, the better it gets at recognizing patterns.\",\n        visual: \"📚 Examples → 🔍 Patterns → 🎯 Predictions\",\n        example: \"To teach AI to recognize spam emails, we show it thousands of spam and normal emails until it learns the difference!\"\n      }\n    },\n    {\n      id: 2,\n      title: \"Types of AI\",\n      icon: <Zap className=\"w-6 h-6\" />,\n      content: {\n        explanation: \"There are different types of AI, like different tools for different jobs. Some AI is great at recognizing images, others at understanding language, and some at playing games.\",\n        visual: \"👁️ Vision AI | 💬 Language AI | 🎮 Game AI\",\n        example: \"Netflix uses AI to recommend movies, your camera app uses AI to focus on faces, and Google Translate uses AI to convert languages!\"\n      }\n    },\n    {\n      id: 3,\n      title: \"AI in Daily Life\",\n      icon: <Eye className=\"w-6 h-6\" />,\n      content: {\n        explanation: \"AI is already all around us! From the moment you wake up to when you go to sleep, AI is helping make your life easier in ways you might not even notice.\",\n        visual: \"🌅 Morning → 🚗 Commute → 💼 Work → 🏠 Home\",\n        example: \"Your alarm clock app, GPS navigation, email filtering, music recommendations, and even your phone's autocorrect - they're all powered by AI!\"\n      }\n    },\n    {\n      id: 4,\n      title: \"Try It Yourself!\",\n      icon: <MessageCircle className=\"w-6 h-6\" />,\n      content: {\n        explanation: \"Now it's your turn! Try chatting with our simple AI below. Ask it questions about what you've learned, or just have a conversation. Remember, this AI was trained on examples just like we discussed!\",\n        visual: \"💬 Your Question → 🤖 AI Processing → 💡 Response\",\n        example: \"Try asking: 'What is machine learning?' or 'How does AI help me every day?'\"\n      }\n    }\n  ];\n\n  const simulateAIResponse = (input) => {\n    setIsTyping(true);\n    \n    setTimeout(() => {\n      let response = \"\";\n      const lowerInput = input.toLowerCase();\n      \n      if (lowerInput.includes('machine learning') || lowerInput.includes('learn')) {\n        response = \"Machine learning is how AI gets smarter! It's like teaching a computer by showing it lots of examples instead of writing specific instructions. The computer finds patterns in the data and learns to make predictions. Pretty cool, right?\";\n      } else if (lowerInput.includes('daily') || lowerInput.includes('everyday') || lowerInput.includes('help')) {\n        response = \"AI helps you every day in so many ways! It filters your spam emails, suggests what to watch on Netflix, helps your photos focus perfectly, translates languages, and even predicts traffic on your commute. It's like having invisible helpers everywhere!\";\n      } else if (lowerInput.includes('scary') || lowerInput.includes('dangerous') || lowerInput.includes('afraid')) {\n        response = \"It's natural to have concerns about AI! The key is understanding it. Most AI today is narrow AI - it can only do specific tasks, like recognizing photos or translating text. It's not like the robots in movies. Understanding AI helps us use it responsibly and benefit from it safely.\";\n      } else if (lowerInput.includes('future') || lowerInput.includes('job')) {\n        response = \"AI will likely change how we work, but history shows that new technology often creates new types of jobs too. The key is learning to work alongside AI. Think of it as a powerful tool that can help you be more productive and creative in your work!\";\n      } else if (lowerInput.includes('hello') || lowerInput.includes('hi')) {\n        response = \"Hello! I'm a simple AI assistant here to help you learn about artificial intelligence. Feel free to ask me anything about what you've learned in the lessons, or just chat with me to see how AI conversation works!\";\n      } else {\n        response = \"That's a great question! AI is all about finding patterns and making predictions. Just like how you learned to recognize patterns (like knowing when someone is happy by their smile), AI learns patterns from data. What aspect of AI interests you most?\";\n      }\n      \n      setChatMessages(prev => [...prev, { type: 'ai', text: response }]);\n      setIsTyping(false);\n    }, 1500);\n  };\n\n  const handleChatSubmit = (e) => {\n    e.preventDefault();\n    if (!chatInput.trim()) return;\n    \n    setChatMessages(prev => [...prev, { type: 'user', text: chatInput }]);\n    simulateAIResponse(chatInput);\n    setChatInput('');\n  };\n\n  const markLessonComplete = () => {\n    setCompletedLessons(prev => new Set([...prev, currentLesson]));\n  };\n\n  const nextLesson = () => {\n    if (currentLesson < lessons.length - 1) {\n      markLessonComplete();\n      setCurrentLesson(currentLesson + 1);\n    }\n  };\n\n  const prevLesson = () => {\n    if (currentLesson > 0) {\n      setCurrentLesson(currentLesson - 1);\n    }\n  };\n\n  const currentLessonData = lessons[currentLesson];\n\n  return (\n    <div className=\"min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4\">\n      <div className=\"max-w-4xl mx-auto\">\n        {/* Header */}\n        <div className=\"text-center mb-8\">\n          <h1 className=\"text-4xl font-bold text-gray-800 mb-2\">\n            AI for Beginners 🤖\n          </h1>\n          <p className=\"text-gray-600\">Learn artificial intelligence in simple, fun steps!</p>\n        </div>\n\n        {/* Progress Bar */}\n        <div className=\"mb-8\">\n          <div className=\"flex justify-between items-center mb-2\">\n            <span className=\"text-sm font-medium text-gray-700\">Progress</span>\n            <span className=\"text-sm font-medium text-gray-700\">\n              {completedLessons.size}/{lessons.length} lessons completed\n            </span>\n          </div>\n          <div className=\"w-full bg-gray-200 rounded-full h-2\">\n            <div \n              className=\"bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300\"\n              style={{ width: `${(completedLessons.size / lessons.length) * 100}%` }}\n            />\n          </div>\n        </div>\n\n        {/* Lesson Navigation */}\n        <div className=\"flex justify-center mb-8\">\n          <div className=\"flex space-x-2 bg-white rounded-lg p-2 shadow-sm\">\n            {lessons.map((lesson) => (\n              <button\n                key={lesson.id}\n                onClick={() => setCurrentLesson(lesson.id)}\n                className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all ${\n                  currentLesson === lesson.id \n                    ? 'bg-blue-500 text-white' \n                    : completedLessons.has(lesson.id)\n                    ? 'bg-green-100 text-green-700 hover:bg-green-200'\n                    : 'text-gray-600 hover:bg-gray-100'\n                }`}\n              >\n                {completedLessons.has(lesson.id) ? (\n                  <CheckCircle className=\"w-4 h-4\" />\n                ) : (\n                  lesson.icon\n                )}\n                <span className=\"hidden sm:inline\">{lesson.title}</span>\n              </button>\n            ))}\n          </div>\n        </div>\n\n        {/* Main Content */}\n        <div className=\"bg-white rounded-xl shadow-lg p-8 mb-8\">\n          <div className=\"flex items-center space-x-3 mb-6\">\n            <div className=\"p-3 bg-blue-100 rounded-lg\">\n              {currentLessonData.icon}\n            </div>\n            <h2 className=\"text-3xl font-bold text-gray-800\">\n              {currentLessonData.title}\n            </h2>\n          </div>\n\n          <div className=\"space-y-6\">\n            {/* Explanation */}\n            <div className=\"bg-gray-50 rounded-lg p-6\">\n              <h3 className=\"text-lg font-semibold text-gray-700 mb-3\">Understanding the Concept</h3>\n              <p className=\"text-gray-600 text-lg leading-relaxed\">\n                {currentLessonData.content.explanation}\n              </p>\n            </div>\n\n            {/* Visual */}\n            <div className=\"bg-blue-50 rounded-lg p-6 text-center\">\n              <h3 className=\"text-lg font-semibold text-blue-700 mb-3\">Visual Summary</h3>\n              <div className=\"text-2xl font-mono text-blue-600\">\n                {currentLessonData.content.visual}\n              </div>\n            </div>\n\n            {/* Example */}\n            <div className=\"bg-green-50 rounded-lg p-6\">\n              <h3 className=\"text-lg font-semibold text-green-700 mb-3\">Real-World Example</h3>\n              <p className=\"text-green-600 text-lg\">\n                {currentLessonData.content.example}\n              </p>\n            </div>\n\n            {/* Interactive Chat for Lesson 4 */}\n            {currentLesson === 4 && (\n              <div className=\"bg-purple-50 rounded-lg p-6\">\n                <h3 className=\"text-lg font-semibold text-purple-700 mb-4\">Chat with AI</h3>\n                <div className=\"bg-white rounded-lg border max-h-64 overflow-y-auto mb-4 p-4\">\n                  {chatMessages.length === 0 ? (\n                    <p className=\"text-gray-500 text-center py-8\">\n                      Start a conversation with the AI! Ask about anything you've learned.\n                    </p>\n                  ) : (\n                    <div className=\"space-y-3\">\n                      {chatMessages.map((msg, idx) => (\n                        <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>\n                          <div className={`max-w-xs px-4 py-2 rounded-lg ${\n                            msg.type === 'user' \n                              ? 'bg-blue-500 text-white' \n                              : 'bg-gray-100 text-gray-800'\n                          }`}>\n                            {msg.text}\n                          </div>\n                        </div>\n                      ))}\n                      {isTyping && (\n                        <div className=\"flex justify-start\">\n                          <div className=\"bg-gray-100 text-gray-800 px-4 py-2 rounded-lg\">\n                            <div className=\"flex space-x-1\">\n                              <div className=\"w-2 h-2 bg-gray-400 rounded-full animate-bounce\"></div>\n                              <div className=\"w-2 h-2 bg-gray-400 rounded-full animate-bounce\" style={{animationDelay: '0.1s'}}></div>\n                              <div className=\"w-2 h-2 bg-gray-400 rounded-full animate-bounce\" style={{animationDelay: '0.2s'}}></div>\n                            </div>\n                          </div>\n                        </div>\n                      )}\n                    </div>\n                  )}\n                </div>\n                <div className=\"flex space-x-2\">\n                  <input\n                    type=\"text\"\n                    value={chatInput}\n                    onChange={(e) => setChatInput(e.target.value)}\n                    placeholder=\"Ask the AI something...\"\n                    className=\"flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500\"\n                    onKeyPress={(e) => {\n                      if (e.key === 'Enter') {\n                        handleChatSubmit(e);\n                      }\n                    }}\n                  />\n                  <button\n                    onClick={handleChatSubmit}\n                    className=\"px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors\"\n                  >\n                    Send\n                  </button>\n                </div>\n              </div>\n            )}\n          </div>\n\n          {/* Navigation */}\n          <div className=\"flex justify-between items-center mt-8\">\n            <button\n              onClick={prevLesson}\n              disabled={currentLesson === 0}\n              className={`flex items-center space-x-2 px-6 py-3 rounded-lg transition-all ${\n                currentLesson === 0\n                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'\n                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'\n              }`}\n            >\n              <ChevronLeft className=\"w-5 h-5\" />\n              <span>Previous</span>\n            </button>\n\n            <button\n              onClick={markLessonComplete}\n              className=\"px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center space-x-2\"\n            >\n              <CheckCircle className=\"w-5 h-5\" />\n              <span>Mark Complete</span>\n            </button>\n\n            <button\n              onClick={nextLesson}\n              disabled={currentLesson === lessons.length - 1}\n              className={`flex items-center space-x-2 px-6 py-3 rounded-lg transition-all ${\n                currentLesson === lessons.length - 1\n                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'\n                  : 'bg-blue-500 text-white hover:bg-blue-600'\n              }`}\n            >\n              <span>Next</span>\n              <ChevronRight className=\"w-5 h-5\" />\n            </button>\n          </div>\n        </div>\n\n        {/* Footer */}\n        <div className=\"text-center text-gray-500 text-sm\">\n          <p>🎓 Keep exploring AI - the future is exciting!</p>\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default App;"
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="AI Learning App for Beginners" />
+    <title>AI for Beginners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { 
+            ChevronRight, 
+            ChevronLeft, 
+            Play, 
+            Brain, 
+            MessageCircle, 
+            Eye, 
+            Zap, 
+            BookOpen, 
+            CheckCircle 
+        } = lucide;
+
+        const App = () => {
+            const [currentLesson, setCurrentLesson] = useState(0);
+            const [completedLessons, setCompletedLessons] = useState(new Set());
+            const [chatInput, setChatInput] = useState('');
+            const [chatMessages, setChatMessages] = useState([]);
+            const [isTyping, setIsTyping] = useState(false);
+
+            const lessons = [
+                {
+                    id: 0,
+                    title: "What is AI?",
+                    icon: React.createElement(Brain, { className: "w-6 h-6" }),
+                    content: {
+                        explanation: "Artificial Intelligence (AI) is like giving computers the ability to think and learn, similar to how humans do. Imagine teaching a computer to recognize your voice, understand what you're saying, and respond helpfully.",
+                        visual: "🧠 + 💻 = 🤖",
+                        example: "When you ask Siri about the weather, that's AI understanding your speech and finding the answer for you!"
+                    }
+                },
+                {
+                    id: 1,
+                    title: "How AI Learns",
+                    icon: React.createElement(BookOpen, { className: "w-6 h-6" }),
+                    content: {
+                        explanation: "AI learns by looking at lots of examples, just like how you learned to recognize cats by seeing many cats. The more examples it sees, the better it gets at recognizing patterns.",
+                        visual: "📚 Examples → 🔍 Patterns → 🎯 Predictions",
+                        example: "To teach AI to recognize spam emails, we show it thousands of spam and normal emails until it learns the difference!"
+                    }
+                },
+                {
+                    id: 2,
+                    title: "Types of AI",
+                    icon: React.createElement(Zap, { className: "w-6 h-6" }),
+                    content: {
+                        explanation: "There are different types of AI, like different tools for different jobs. Some AI is great at recognizing images, others at understanding language, and some at playing games.",
+                        visual: "👁️ Vision AI | 💬 Language AI | 🎮 Game AI",
+                        example: "Netflix uses AI to recommend movies, your camera app uses AI to focus on faces, and Google Translate uses AI to convert languages!"
+                    }
+                },
+                {
+                    id: 3,
+                    title: "AI in Daily Life",
+                    icon: React.createElement(Eye, { className: "w-6 h-6" }),
+                    content: {
+                        explanation: "AI is already all around us! From the moment you wake up to when you go to sleep, AI is helping make your life easier in ways you might not even notice.",
+                        visual: "🌅 Morning → 🚗 Commute → 💼 Work → 🏠 Home",
+                        example: "Your alarm clock app, GPS navigation, email filtering, music recommendations, and even your phone's autocorrect - they're all powered by AI!"
+                    }
+                },
+                {
+                    id: 4,
+                    title: "Try It Yourself!",
+                    icon: React.createElement(MessageCircle, { className: "w-6 h-6" }),
+                    content: {
+                        explanation: "Now it's your turn! Try chatting with our simple AI below. Ask it questions about what you've learned, or just have a conversation. Remember, this AI was trained on examples just like we discussed!",
+                        visual: "💬 Your Question → 🤖 AI Processing → 💡 Response",
+                        example: "Try asking: 'What is machine learning?' or 'How does AI help me every day?'"
+                    }
+                }
+            ];
+
+            const simulateAIResponse = (input) => {
+                setIsTyping(true);
+                
+                setTimeout(() => {
+                    let response = "";
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (lowerInput.includes('machine learning') || lowerInput.includes('learn')) {
+                        response = "Machine learning is how AI gets smarter! It's like teaching a computer by showing it lots of examples instead of writing specific instructions. The computer finds patterns in the data and learns to make predictions. Pretty cool, right?";
+                    } else if (lowerInput.includes('daily') || lowerInput.includes('everyday') || lowerInput.includes('help')) {
+                        response = "AI helps you every day in so many ways! It filters your spam emails, suggests what to watch on Netflix, helps your photos focus perfectly, translates languages, and even predicts traffic on your commute. It's like having invisible helpers everywhere!";
+                    } else if (lowerInput.includes('scary') || lowerInput.includes('dangerous') || lowerInput.includes('afraid')) {
+                        response = "It's natural to have concerns about AI! The key is understanding it. Most AI today is narrow AI - it can only do specific tasks, like recognizing photos or translating text. It's not like the robots in movies. Understanding AI helps us use it responsibly and benefit from it safely.";
+                    } else if (lowerInput.includes('future') || lowerInput.includes('job')) {
+                        response = "AI will likely change how we work, but history shows that new technology often creates new types of jobs too. The key is learning to work alongside AI. Think of it as a powerful tool that can help you be more productive and creative in your work!";
+                    } else if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
+                        response = "Hello! I'm a simple AI assistant here to help you learn about artificial intelligence. Feel free to ask me anything about what you've learned in the lessons, or just chat with me to see how AI conversation works!";
+                    } else {
+                        response = "That's a great question! AI is all about finding patterns and making predictions. Just like how you learned to recognize patterns (like knowing when someone is happy by their smile), AI learns patterns from data. What aspect of AI interests you most?";
+                    }
+                    
+                    setChatMessages(prev => [...prev, { type: 'ai', text: response }]);
+                    setIsTyping(false);
+                }, 1500);
+            };
+
+            const handleChatSubmit = (e) => {
+                e.preventDefault();
+                if (!chatInput.trim()) return;
+                
+                setChatMessages(prev => [...prev, { type: 'user', text: chatInput }]);
+                simulateAIResponse(chatInput);
+                setChatInput('');
+            };
+
+            const markLessonComplete = () => {
+                setCompletedLessons(prev => new Set([...prev, currentLesson]));
+            };
+
+            const nextLesson = () => {
+                if (currentLesson < lessons.length - 1) {
+                    markLessonComplete();
+                    setCurrentLesson(currentLesson + 1);
+                }
+            };
+
+            const prevLesson = () => {
+                if (currentLesson > 0) {
+                    setCurrentLesson(currentLesson - 1);
+                }
+            };
+
+            const currentLessonData = lessons[currentLesson];
+
+            return React.createElement('div', { className: "min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4" },
+                React.createElement('div', { className: "max-w-4xl mx-auto" },
+                    // Header
+                    React.createElement('div', { className: "text-center mb-8" },
+                        React.createElement('h1', { className: "text-4xl font-bold text-gray-800 mb-2" },
+                            "AI for Beginners 🤖"
+                        ),
+                        React.createElement('p', { className: "text-gray-600" },
+                            "Learn artificial intelligence in simple, fun steps!"
+                        )
+                    ),
+                    // Progress Bar
+                    React.createElement('div', { className: "mb-8" },
+                        React.createElement('div', { className: "flex justify-between items-center mb-2" },
+                            React.createElement('span', { className: "text-sm font-medium text-gray-700" }, "Progress"),
+                            React.createElement('span', { className: "text-sm font-medium text-gray-700" },
+                                `${completedLessons.size}/${lessons.length} lessons completed`
+                            )
+                        ),
+                        React.createElement('div', { className: "w-full bg-gray-200 rounded-full h-2" },
+                            React.createElement('div', { 
+                                className: "bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300",
+                                style: { width: `${(completedLessons.size / lessons.length) * 100}%` }
+                            })
+                        )
+                    ),
+                    // Lesson Navigation
+                    React.createElement('div', { className: "flex justify-center mb-8" },
+                        React.createElement('div', { className: "flex space-x-2 bg-white rounded-lg p-2 shadow-sm" },
+                            lessons.map((lesson) =>
+                                React.createElement('button', {
+                                    key: lesson.id,
+                                    onClick: () => setCurrentLesson(lesson.id),
+                                    className: `flex items-center space-x-2 px-4 py-2 rounded-md transition-all ${
+                                        currentLesson === lesson.id 
+                                            ? 'bg-blue-500 text-white' 
+                                            : completedLessons.has(lesson.id)
+                                            ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                                            : 'text-gray-600 hover:bg-gray-100'
+                                    }`
+                                },
+                                    completedLessons.has(lesson.id) ? 
+                                        React.createElement(CheckCircle, { className: "w-4 h-4" }) :
+                                        lesson.icon,
+                                    React.createElement('span', { className: "hidden sm:inline" }, lesson.title)
+                                )
+                            )
+                        )
+                    ),
+                    // Main Content
+                    React.createElement('div', { className: "bg-white rounded-xl shadow-lg p-8 mb-8" },
+                        React.createElement('div', { className: "flex items-center space-x-3 mb-6" },
+                            React.createElement('div', { className: "p-3 bg-blue-100 rounded-lg" },
+                                currentLessonData.icon
+                            ),
+                            React.createElement('h2', { className: "text-3xl font-bold text-gray-800" },
+                                currentLessonData.title
+                            )
+                        ),
+                        React.createElement('div', { className: "space-y-6" },
+                            // Explanation
+                            React.createElement('div', { className: "bg-gray-50 rounded-lg p-6" },
+                                React.createElement('h3', { className: "text-lg font-semibold text-gray-700 mb-3" }, "Understanding the Concept"),
+                                React.createElement('p', { className: "text-gray-600 text-lg leading-relaxed" },
+                                    currentLessonData.content.explanation
+                                )
+                            ),
+                            // Visual
+                            React.createElement('div', { className: "bg-blue-50 rounded-lg p-6 text-center" },
+                                React.createElement('h3', { className: "text-lg font-semibold text-blue-700 mb-3" }, "Visual Summary"),
+                                React.createElement('div', { className: "text-2xl font-mono text-blue-600" },
+                                    currentLessonData.content.visual
+                                )
+                            ),
+                            // Example
+                            React.createElement('div', { className: "bg-green-50 rounded-lg p-6" },
+                                React.createElement('h3', { className: "text-lg font-semibold text-green-700 mb-3" }, "Real-World Example"),
+                                React.createElement('p', { className: "text-green-600 text-lg" },
+                                    currentLessonData.content.example
+                                )
+                            ),
+                            // Interactive Chat for Lesson 4
+                            currentLesson === 4 && React.createElement('div', { className: "bg-purple-50 rounded-lg p-6" },
+                                React.createElement('h3', { className: "text-lg font-semibold text-purple-700 mb-4" }, "Chat with AI"),
+                                React.createElement('div', { className: "bg-white rounded-lg border max-h-64 overflow-y-auto mb-4 p-4" },
+                                    chatMessages.length === 0 ? 
+                                        React.createElement('p', { className: "text-gray-500 text-center py-8" },
+                                            "Start a conversation with the AI! Ask about anything you've learned."
+                                        ) : 
+                                        React.createElement('div', { className: "space-y-3" },
+                                            chatMessages.map((msg, idx) =>
+                                                React.createElement('div', { 
+                                                    key: idx, 
+                                                    className: `flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`
+                                                },
+                                                    React.createElement('div', { 
+                                                        className: `max-w-xs px-4 py-2 rounded-lg ${
+                                                            msg.type === 'user' 
+                                                                ? 'bg-blue-500 text-white' 
+                                                                : 'bg-gray-100 text-gray-800'
+                                                        }`
+                                                    }, msg.text)
+                                                )
+                                            ),
+                                            isTyping && React.createElement('div', { className: "flex justify-start" },
+                                                React.createElement('div', { className: "bg-gray-100 text-gray-800 px-4 py-2 rounded-lg" },
+                                                    React.createElement('div', { className: "flex space-x-1" },
+                                                        React.createElement('div', { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce" }),
+                                                        React.createElement('div', { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: {animationDelay: '0.1s'} }),
+                                                        React.createElement('div', { className: "w-2 h-2 bg-gray-400 rounded-full animate-bounce", style: {animationDelay: '0.2s'} })
+                                                    )
+                                                )
+                                            )
+                                        )
+                                ),
+                                React.createElement('div', { className: "flex space-x-2" },
+                                    React.createElement('input', {
+                                        type: "text",
+                                        value: chatInput,
+                                        onChange: (e) => setChatInput(e.target.value),
+                                        placeholder: "Ask the AI something...",
+                                        className: "flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500",
+                                        onKeyPress: (e) => {
+                                            if (e.key === 'Enter') {
+                                                handleChatSubmit(e);
+                                            }
+                                        }
+                                    }),
+                                    React.createElement('button', {
+                                        onClick: handleChatSubmit,
+                                        className: "px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+                                    }, "Send")
+                                )
+                            )
+                        ),
+                        // Navigation
+                        React.createElement('div', { className: "flex justify-between items-center mt-8" },
+                            React.createElement('button', {
+                                onClick: prevLesson,
+                                disabled: currentLesson === 0,
+                                className: `flex items-center space-x-2 px-6 py-3 rounded-lg transition-all ${
+                                    currentLesson === 0
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                }`
+                            },
+                                React.createElement(ChevronLeft, { className: "w-5 h-5" }),
+                                React.createElement('span', {}, "Previous")
+                            ),
+                            React.createElement('button', {
+                                onClick: markLessonComplete,
+                                className: "px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center space-x-2"
+                            },
+                                React.createElement(CheckCircle, { className: "w-5 h-5" }),
+                                React.createElement('span', {}, "Mark Complete")
+                            ),
+                            React.createElement('button', {
+                                onClick: nextLesson,
+                                disabled: currentLesson === lessons.length - 1,
+                                className: `flex items-center space-x-2 px-6 py-3 rounded-lg transition-all ${
+                                    currentLesson === lessons.length - 1
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-blue-500 text-white hover:bg-blue-600'
+                                }`
+                            },
+                                React.createElement('span', {}, "Next"),
+                                React.createElement(ChevronRight, { className: "w-5 h-5" })
+                            )
+                        )
+                    ),
+                    // Footer
+                    React.createElement('div', { className: "text-center text-gray-500 text-sm" },
+                        React.createElement('p', {}, "🎓 Keep exploring AI - the future is exciting!")
+                    )
+                )
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
+</body>
+</html>
