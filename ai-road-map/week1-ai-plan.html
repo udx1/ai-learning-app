@@ -119,6 +119,135 @@
             transform: translateY(-2px);
         }
 
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .progress-percentage {
+            color: #ffd700;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-weeks {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .week-marker {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .week-marker.active {
+            background: #ffd700;
+            color: #2d3748;
+            transform: scale(1.1);
+        }
+
+        /* Daily Progress Markers */
+        .progress-days {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .day-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .day-marker:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .day-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            margin-bottom: 0.3rem;
+        }
+
+        .day-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .day-marker.completed .day-number {
+            background: #28a745;
+            color: white;
+        }
+
+        .day-marker.current .day-number {
+            background: #ffd700;
+            color: #2d3748;
+            transform: scale(1.1);
+        }
+
+        .day-marker.completed .day-label,
+        .day-marker.current .day-label {
+            color: white;
+        }
+
         .days-container {
             display: grid;
             gap: 2rem;
@@ -275,6 +404,7 @@
                 <a href="index.html" class="logo">🤖 AI Learning Journey</a>
                 <nav>
                     <ul class="nav-links">
+                        <li><a href="index.html">← Back to Learning Path</a></li>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="#weeks">Weeks</a></li>
                         <li><a href="#resources">Resources</a></li>
@@ -292,9 +422,46 @@
             <div class="week-header">
                 <h1 class="week-title">Week 1: AI Fundamentals</h1>
                 <p class="week-subtitle">Start your AI journey with core concepts, terminology, and basic Python programming</p>
-                <a href="index.html" class="back-button">
-                    ← Back to Learning Path
-                </a>
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-text">Week 1: AI Fundamentals</span>
+                        <span class="progress-percentage">0/7 Days</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-days">
+                        <div class="day-marker" data-day="1">
+                            <span class="day-number">1</span>
+                            <span class="day-label">Mon</span>
+                        </div>
+                        <div class="day-marker" data-day="2">
+                            <span class="day-number">2</span>
+                            <span class="day-label">Tue</span>
+                        </div>
+                        <div class="day-marker" data-day="3">
+                            <span class="day-number">3</span>
+                            <span class="day-label">Wed</span>
+                        </div>
+                        <div class="day-marker" data-day="4">
+                            <span class="day-number">4</span>
+                            <span class="day-label">Thu</span>
+                        </div>
+                        <div class="day-marker" data-day="5">
+                            <span class="day-number">5</span>
+                            <span class="day-label">Fri</span>
+                        </div>
+                        <div class="day-marker" data-day="6">
+                            <span class="day-number">6</span>
+                            <span class="day-label">Sat</span>
+                        </div>
+                        <div class="day-marker" data-day="7">
+                            <span class="day-number">7</span>
+                            <span class="day-label">Sun</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="days-container">
