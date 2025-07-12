@@ -3,555 +3,653 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1: AI Fundamentals - Daily Action Plan</title>
+    <title>Week 1: AI Fundamentals - AI Learning Journey</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
         }
-        
+
         .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        h1 {
-            color: #2c3e50;
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #ffd700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd700;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .week-header {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            margin-bottom: 3rem;
         }
-        
-        h2 {
-            color: #34495e;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-            font-size: 1.5rem;
+
+        .week-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
-        h3 {
-            color: #e74c3c;
-            margin-top: 1.5rem;
+
+        .week-subtitle {
             font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
         }
-        
-        .day-content {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin: 1rem 0;
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .time-block {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: white;
-            border-radius: 4px;
-            border-left: 4px solid #3498db;
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
-        
-        .course-info {
-            background: #fff3cd;
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-            border-left: 4px solid #ffc107;
+
+        .days-container {
+            display: grid;
+            gap: 2rem;
         }
-        
-        .action-list {
-            background: #d1ecf1;
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin: 0.5rem 0;
-            border-left: 4px solid #17a2b8;
+
+        .day-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
-        
-        ul, ol {
+
+        .day-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .time-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .time-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .time-duration {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .activity-content {
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-steps {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .activity-steps li {
+            padding: 0.3rem 0;
+            color: #718096;
+            position: relative;
             padding-left: 1.5rem;
         }
-        
-        li {
-            margin: 0.25rem 0;
+
+        .activity-steps li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
         }
-        
-        strong {
-            color: #2c3e50;
+
+        .highlight {
+            background: #ffd700;
+            color: #2d3748;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 600;
         }
-        
-        .nav-links {
-            background: #343a40;
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem 0;
             color: white;
-            padding: 1rem;
-            border-radius: 6px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             margin-bottom: 2rem;
         }
-        
-        .nav-links a {
-            color: #17a2b8;
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            display: block;
-            padding: 0.25rem 0;
+            transition: color 0.3s ease;
         }
-        
-        .nav-links a:hover {
-            color: #20c997;
+
+        .footer-section a:hover {
+            color: #ffd700;
         }
-        
-        .resources {
-            background: #e8f5e8;
-            padding: 1.5rem;
-            border-radius: 6px;
-            margin: 2rem 0;
-        }
-        
-        .tip-box {
-            background: #fff8dc;
-            padding: 1rem;
-            border-radius: 4px;
-            border-left: 4px solid #ffa500;
-            margin: 1rem 0;
-        }
-        
-        .checkbox-item {
-            margin: 0.5rem 0;
-        }
-        
-        .checkbox-item input {
-            margin-right: 0.5rem;
-        }
-        
-        .time-commitment {
-            background: #ffe6e6;
-            padding: 1rem;
-            border-radius: 4px;
+
+        .footer-bottom {
             text-align: center;
-            font-weight: bold;
-            margin: 1rem 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .week-title {
+                font-size: 2rem;
+            }
+            
+            .day-card {
+                padding: 1.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Week 1: AI Fundamentals - Daily Action Plan</h1>
-        
-        <div class="nav-links">
-            <h3>Quick Navigation</h3>
-            <a href="#day1">Day 1: Introduction to AI & Machine Learning</a>
-            <a href="#day2">Day 2: Types of Machine Learning</a>
-            <a href="#day3">Day 3: Key AI Concepts & Terminology</a>
-            <a href="#day4">Day 4: Python Basics for AI</a>
-            <a href="#day5">Day 5: Introduction to Data Science</a>
-            <a href="#day6">Day 6: Practical AI Applications</a>
-            <a href="#day7">Day 7: Week Review & Planning</a>
-        </div>
-
-        <div class="day-content" id="day1">
-            <h2>Day 1: Introduction to AI & Machine Learning</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Course:</strong> Start "Machine Learning for Everyone" by Andrew Ng (Coursera)
-                </div>
-                <div class="action-list">
-                    <strong>Specific Steps:</strong>
-                    <ul>
-                        <li>Create Coursera account and enroll in the course</li>
-                        <li>Complete Week 1: "What is Machine Learning?" (30 min)</li>
-                        <li>Watch "Introduction to Machine Learning" video</li>
-                        <li>Take notes on key definitions: supervised vs unsupervised learning</li>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">🤖 AI Learning Journey</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#weeks">Weeks</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#progress">Progress</a></li>
+                        <li><a href="#community">Community</a></li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Reading:</strong> "AI vs Machine Learning vs Deep Learning" article on Towards Data Science
-                </div>
-                <div class="action-list">
-                    <strong>Action:</strong> Create a simple mind map showing relationships between AI, ML, and DL
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Practical:</strong> Set up your learning environment
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Install Python and Jupyter Notebook (or use Google Colab)</li>
-                        <li>Create a "Week 1 Notes" document</li>
-                    </ul>
-                </div>
+                </nav>
             </div>
         </div>
+    </header>
 
-        <div class="day-content" id="day2">
-            <h2>Day 2: Types of Machine Learning</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Course:</strong> Continue Andrew Ng's course
-                </div>
-                <div class="action-list">
-                    <strong>Specific Steps:</strong>
-                    <ol>
-                        <li>Complete "Supervised Learning" section</li>
-                        <li>Watch examples of classification and regression</li>
-                        <li>Complete the quiz (aim for 80%+)</li>
-                    </ol>
-                </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="week-header">
+                <h1 class="week-title">Week 1: AI Fundamentals</h1>
+                <p class="week-subtitle">Start your AI journey with core concepts, terminology, and basic Python programming</p>
+                <a href="index.html" class="back-button">
+                    ← Back to Learning Path
+                </a>
             </div>
 
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Hands-on:</strong> "Your First Machine Learning Project in Python" on Machine Learning Mastery
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Load a simple dataset (Iris dataset)</li>
-                        <li>Run basic data exploration commands</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="days-container">
+                <!-- Day 1 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 1: Introduction to AI & Machine Learning</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Course: Start "Machine Learning for Everyone" by Andrew Ng (Coursera)</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Create Coursera account and enroll in the course</li>
+                                <li>Complete Week 1: "What is Machine Learning?" (30 min)</li>
+                                <li>Watch "Introduction to Machine Learning" video</li>
+                                <li>Take notes on key definitions: <span class="highlight">supervised vs unsupervised learning</span></li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Reflection:</strong>
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Reading: "AI vs Machine Learning vs Deep Learning" article on Towards Data Science</div>
+                            <div class="activity-title">Action: Create a simple mind map showing relationships between AI, ML, and DL</div>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Practical: Set up your learning environment</div>
+                            <ul class="activity-steps">
+                                <li>Install Python and Jupyter Notebook (or use Google Colab)</li>
+                                <li>Create a "Week 1 Notes" document</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Write 5 real-world examples each of classification and regression problems</li>
-                        <li>Think of how these apply to your field of interest</li>
-                    </ul>
+
+                <!-- Day 2 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 2: Python Basics for AI</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Course: "Python for Everybody" on Coursera or "Learn Python" on Codecademy</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Complete basic syntax and data types</li>
+                                <li>Learn about variables, lists, and dictionaries</li>
+                                <li>Practice with simple exercises</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Hands-on: Write your first Python programs</div>
+                            <ul class="activity-steps">
+                                <li>Create a calculator program</li>
+                                <li>Build a simple data analyzer using lists</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Review: Document your Python learning progress</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 3: Key AI Concepts & Terminology</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Course: "AI for Everyone" by Andrew Ng (Coursera)</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Complete Week 1: "What is AI?"</li>
+                                <li>Learn about training data, algorithms, and models</li>
+                                <li>Understand the AI project workflow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Vocabulary Building: Use "AI Glossary" on Google's AI Education</div>
+                            <div class="activity-title">Action: Create flashcards for 20 key terms:</div>
+                            <ul class="activity-steps">
+                                <li><span class="highlight">Algorithm, Model, Training, Validation, Overfitting, Underfitting</span></li>
+                                <li><span class="highlight">Neural Network, Deep Learning, Natural Language Processing</span></li>
+                                <li><span class="highlight">Computer Vision, Reinforcement Learning</span>, etc.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Practice: Use your new vocabulary</div>
+                            <div class="activity-title">Write a paragraph explaining AI to a friend using at least 10 terms from your flashcards</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 4: Introduction to Data Science Libraries</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Tutorial: Introduction to NumPy and Pandas</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Install NumPy and Pandas libraries</li>
+                                <li>Learn basic array operations with NumPy</li>
+                                <li>Understand DataFrames in Pandas</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Practice: Work with sample datasets</div>
+                            <ul class="activity-steps">
+                                <li>Load a CSV file using Pandas</li>
+                                <li>Perform basic data exploration</li>
+                                <li>Calculate simple statistics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Reflection: Document your data science learning</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 5: First ML Project Setup</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Tutorial: "Your First Machine Learning Project" on Kaggle Learn</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Create a Kaggle account</li>
+                                <li>Complete the intro to ML course</li>
+                                <li>Understand the ML workflow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Hands-on: Set up your first ML project</div>
+                            <ul class="activity-steps">
+                                <li>Choose a simple dataset (e.g., iris flowers)</li>
+                                <li>Set up the project structure</li>
+                                <li>Load and explore the data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Planning: Outline your Week 2 learning goals</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 6 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 6: Review & Practice</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Review: Go through all your notes and materials</div>
+                            <div class="activity-title">Practice: Complete coding exercises</div>
+                            <ul class="activity-steps">
+                                <li>Review Python basics</li>
+                                <li>Practice with NumPy and Pandas</li>
+                                <li>Review AI terminology</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Assessment: Test your knowledge</div>
+                            <ul class="activity-steps">
+                                <li>Take online quizzes on AI concepts</li>
+                                <li>Complete coding challenges</li>
+                                <li>Self-assess your progress</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Reflection: Write a summary of Week 1 learnings</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="day-card">
+                    <h2 class="day-title">Day 7: Project Work & Preparation</h2>
+                    
+                    <div class="time-section">
+                        <div class="time-header">
+                            Morning <span class="time-duration">2 hours</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Project: Build your first simple ML model</div>
+                            <div class="activity-title">Specific Steps:</div>
+                            <ul class="activity-steps">
+                                <li>Use scikit-learn to build a basic classifier</li>
+                                <li>Train the model on your chosen dataset</li>
+                                <li>Make predictions and evaluate results</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Afternoon <span class="time-duration">1 hour</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Documentation: Create a project report</div>
+                            <ul class="activity-steps">
+                                <li>Document your process and findings</li>
+                                <li>Include code snippets and explanations</li>
+                                <li>Reflect on challenges and learnings</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="time-section">
+                        <div class="time-header">
+                            Evening <span class="time-duration">30 min</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Preparation: Get ready for Week 2</div>
+                            <div class="activity-title">Preview upcoming topics and set goals</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="day-content" id="day3">
-            <h2>Day 3: Key AI Concepts & Terminology</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Course:</strong> "AI for Everyone" by Andrew Ng (Coursera)
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Learning Resources</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#">Coursera Courses</a></li>
+                        <li><a href="#">Kaggle Learn</a></li>
+                        <li><a href="#">YouTube Tutorials</a></li>
+                        <li><a href="#">AI Research Papers</a></li>
+                    </ul>
                 </div>
-                <div class="action-list">
-                    <strong>Specific Steps:</strong>
-                    <ol>
-                        <li>Complete Week 1: "What is AI?"</li>
-                        <li>Learn about training data, algorithms, and models</li>
-                        <li>Understand the AI project workflow</li>
-                    </ol>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#">Discussion Forum</a></li>
+                        <li><a href="#">Study Groups</a></li>
+                        <li><a href="#">Mentor Connect</a></li>
+                        <li><a href="#">Project Showcase</a></li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Vocabulary Building:</strong> Use "AI Glossary" on Google's AI Education
+                <div class="footer-section">
+                    <h3>Tools & Libraries</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#">Python Setup Guide</a></li>
+                        <li><a href="#">Jupyter Notebooks</a></li>
+                        <li><a href="#">TensorFlow Resources</a></li>
+                        <li><a href="#">Dataset Repository</a></li>
+                    </ul>
                 </div>
-                <div class="action-list">
-                    <strong>Action:</strong> Create flashcards for 20 key terms:
-                    <ul>
-                        <li>Algorithm, Model, Training, Validation, Overfitting, Underfitting</li>
-                        <li>Neural Network, Deep Learning, Natural Language Processing</li>
-                        <li>Computer Vision, Reinforcement Learning, etc.</li>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Technical Help</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Feedback</a></li>
                     </ul>
                 </div>
             </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Practice:</strong> Use your new vocabulary
-                </div>
-                <div class="action-list">
-                    Write a paragraph explaining AI to a friend using at least 10 terms from your flashcards
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AI Learning Journey. Empowering the next generation of AI practitioners.</p>
             </div>
         </div>
-
-        <div class="day-content" id="day4">
-            <h2>Day 4: Python Basics for AI</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Course:</strong> "Python for Data Science" on Codecademy (first 2 lessons)
-                </div>
-                <div class="action-list">
-                    <strong>Specific Steps:</strong>
-                    <ol>
-                        <li>Complete "Python Syntax" lesson</li>
-                        <li>Learn variables, data types, and basic operations</li>
-                        <li>Practice with interactive exercises</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Hands-on Practice:</strong> "Python Crash Course for Data Science" on YouTube (Corey Schafer)
-                </div>
-                <div class="action-list">
-                    <strong>Action:</strong> Write 5 simple Python programs:
-                    <ol>
-                        <li>Calculate average of a list of numbers</li>
-                        <li>Count occurrences of words in a sentence</li>
-                        <li>Create a simple calculator</li>
-                        <li>Generate random numbers</li>
-                        <li>Read and display data from a text file</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Library Introduction:</strong>
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Install and import: NumPy, Pandas, Matplotlib</li>
-                        <li>Run basic commands with each library</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="day-content" id="day5">
-            <h2>Day 5: Introduction to Data Science</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Course:</strong> "Data Science Fundamentals" on edX or Coursera
-                </div>
-                <div class="action-list">
-                    <strong>Specific Steps:</strong>
-                    <ol>
-                        <li>Understand the data science process</li>
-                        <li>Learn about data collection, cleaning, and analysis</li>
-                        <li>Complete introductory exercises</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Practical Exercise:</strong> Download the Titanic dataset from Kaggle
-                </div>
-                <div class="action-list">
-                    <strong>Actions:</strong>
-                    <ol>
-                        <li>Load the dataset using Pandas</li>
-                        <li>Explore the data structure (head, info, describe)</li>
-                        <li>Identify missing values</li>
-                        <li>Create 2 simple visualizations using Matplotlib</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Case Study Review:</strong>
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Read one AI success story (e.g., how Netflix uses recommendation systems)</li>
-                        <li>Identify what type of ML problem it solves</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="day-content" id="day6">
-            <h2>Day 6: Practical AI Applications</h2>
-            
-            <div class="time-block">
-                <h3>Morning (2 hours)</h3>
-                <div class="course-info">
-                    <strong>Exploration:</strong> Try Google's "Teachable Machine" (teachablemachine.withgoogle.com)
-                </div>
-                <div class="action-list">
-                    <strong>Projects:</strong>
-                    <ol>
-                        <li>Create an image classifier (30 min)</li>
-                        <li>Create a sound classifier (30 min)</li>
-                        <li>Create a pose classifier (30 min)</li>
-                        <li>Export and test your models (30 min)</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Industry Research:</strong> Research AI applications in 3 different industries
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li><strong>Focus:</strong> Healthcare, Finance, and Transportation</li>
-                        <li><strong>Deliverable:</strong> Create a one-page summary of how AI is used in each</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Ethics Introduction:</strong>
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Read "AI Ethics: The Basics" article</li>
-                        <li>List 5 potential ethical concerns with AI systems</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="day-content" id="day7">
-            <h2>Day 7: Week Review & Planning</h2>
-            
-            <div class="time-block">
-                <h3>Morning (1.5 hours)</h3>
-                <div class="course-info">
-                    <strong>Review Session:</strong>
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li><strong>Quiz Yourself:</strong> Create and answer 20 questions about this week's content</li>
-                        <li><strong>Code Review:</strong> Go through all Python code you've written</li>
-                        <li><strong>Concept Mapping:</strong> Create a comprehensive mind map of everything learned</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Afternoon (1 hour)</h3>
-                <div class="course-info">
-                    <strong>Mini Project:</strong> Create a simple "AI in 5 minutes" presentation
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li><strong>Content:</strong> Explain AI, ML, and DL to someone with no technical background</li>
-                        <li><strong>Practice:</strong> Record yourself or present to a friend/family member</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="time-block">
-                <h3>Evening (30 min)</h3>
-                <div class="course-info">
-                    <strong>Week 2 Preparation:</strong>
-                </div>
-                <div class="action-list">
-                    <ul>
-                        <li>Preview next week's topics</li>
-                        <li>Set up any additional tools needed</li>
-                        <li>Plan your learning schedule for the following week</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resources">
-            <h2>Weekly Learning Resources</h2>
-            
-            <h3>Primary Courses</h3>
-            <ol>
-                <li><strong>"Machine Learning for Everyone"</strong> - Andrew Ng (Coursera) - FREE audit</li>
-                <li><strong>"AI for Everyone"</strong> - Andrew Ng (Coursera) - FREE audit</li>
-                <li><strong>"Python for Data Science"</strong> - Codecademy - FREE tier available</li>
-            </ol>
-
-            <h3>Supplementary Resources</h3>
-            <ul>
-                <li><strong>YouTube Channels:</strong> 3Blue1Brown, Two Minute Papers, Sentdex</li>
-                <li><strong>Websites:</strong> Towards Data Science (Medium), Machine Learning Mastery</li>
-                <li><strong>Tools:</strong> Google Colab (free), Jupyter Notebook, VS Code</li>
-            </ul>
-
-            <h3>Books (Optional)</h3>
-            <ul>
-                <li>"AI for People in a Hurry" by Neil Reddy</li>
-                <li>"Python Crash Course" by Eric Matthes</li>
-            </ul>
-        </div>
-
-        <div class="resources">
-            <h2>Success Metrics for Week 1</h2>
-            
-            <p><strong>By end of week, you should be able to:</strong></p>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric1">
-                <label for="metric1">Explain the difference between AI, ML, and Deep Learning</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric2">
-                <label for="metric2">Identify 3 types of machine learning with examples</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric3">
-                <label for="metric3">Write basic Python code for data manipulation</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric4">
-                <label for="metric4">Load and explore a dataset using Pandas</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric5">
-                <label for="metric5">Create a simple visualization</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric6">
-                <label for="metric6">Train a basic model using Google's Teachable Machine</label>
-            </div>
-            <div class="checkbox-item">
-                <input type="checkbox" id="metric7">
-                <label for="metric7">Discuss 3 ethical considerations in AI</label>
-            </div>
-            
-            <div class="time-commitment">
-                <strong>Time Investment:</strong> 3-3.5 hours per day (21-24.5 hours total)
-            </div>
-        </div>
-
-        <div class="resources">
-            <h2>Tips for Success</h2>
-            
-            <div class="tip-box">
-                <ol>
-                    <li><strong>Take Notes:</strong> Write down key concepts in your own words</li>
-                    <li><strong>Practice Daily:</strong> Even 15 minutes of coding practice helps</li>
-                    <li><strong>Join Communities:</strong> Consider joining Reddit's r/MachineLearning or AI Discord servers</li>
-                    <li><strong>Ask Questions:</strong> Use ChatGPT or Claude to clarify concepts you don't understand</li>
-                    <li><strong>Stay Consistent:</strong> It's better to study 30 minutes daily than 3 hours once</li>
-                </ol>
-            </div>
-            
-            <div class="tip-box">
-                <strong>Remember:</strong> This is a foundation week. Don't worry if everything doesn't click immediately - focus on exposure and building vocabulary!
-            </div>
-        </div>
-    </div>
+    </footer>
 </body>
 </html>
