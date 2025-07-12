@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Course Plan - 3 Month Learning Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(50px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            background: #ecf0f1;
+            height: 6px;
+            border-radius: 3px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            height: 100%;
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .course-overview {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .course-overview h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .course-overview p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .week-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 2px solid #ecf0f1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .week-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+
+        .week-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .week-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .week-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .week-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .week-topics {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .week-topics li {
+            color: #34495e;
+            padding: 5px 0;
+            border-bottom: 1px solid #ecf0f1;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .week-topics li:last-child {
+            border-bottom: none;
+        }
+
+        .week-topics li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .week-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-coming-soon {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .footer {
+            background: #34495e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .weeks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI Mastery Journey</h1>
+            <p>Your Complete 3-Month Learning Path to Artificial Intelligence</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="course-overview">
+                <h2>Transform Your Understanding of AI</h2>
+                <p>
+                    From complete beginner to AI practitioner in 12 weeks. This comprehensive course plan takes you through 
+                    fundamentals, practical applications, and advanced topics with hands-on projects and real-world examples.
+                </p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Weeks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3-4</div>
+                    <div class="stat-label">Hours/Day</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Resources</div>
+                </div>
+            </div>
+
+            <div class="weeks-grid">
+                <a href="week1-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 1</div>
+                    <div class="week-title">AI Fundamentals</div>
+                    <div class="week-description">
+                        Start your AI journey with core concepts, terminology, and basic Python programming.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Introduction to AI & ML</li>
+                        <li>Python Basics</li>
+                        <li>Key Terminology</li>
+                        <li>First ML Project</li>
+                    </ul>
+                    <div class="week-status status-available">Available</div>
+                </a>
+
+                <a href="week2-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 2</div>
+                    <div class="week-title">Data Science Foundations</div>
+                    <div class="week-description">
+                        Master data manipulation, visualization, and statistical analysis with Python libraries.
+                    </div>
+                    <ul class="week-topics">
+                        <li>NumPy & Pandas</li>
+                        <li>Data Visualization</li>
+                        <li>Statistics for ML</li>
+                        <li>Data Cleaning</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week3-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 3</div>
+                    <div class="week-title">Machine Learning Algorithms</div>
+                    <div class="week-description">
+                        Explore supervised learning algorithms and build your first prediction models.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Linear Regression</li>
+                        <li>Classification</li>
+                        <li>Decision Trees</li>
+                        <li>Model Evaluation</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week4-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 4</div>
+                    <div class="week-title">Advanced ML & Unsupervised Learning</div>
+                    <div class="week-description">
+                        Dive into clustering, dimensionality reduction, and ensemble methods.
+                    </div>
+                    <ul class="week-topics">
+                        <li>K-Means Clustering</li>
+                        <li>PCA</li>
+                        <li>Random Forest</li>
+                        <li>Feature Engineering</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week5-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 5</div>
+                    <div class="week-title">Deep Learning Introduction</div>
+                    <div class="week-description">
+                        Enter the world of neural networks and deep learning fundamentals.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Neural Networks</li>
+                        <li>TensorFlow/Keras</li>
+                        <li>Backpropagation</li>
+                        <li>First Deep Model</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week6-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 6</div>
+                    <div class="week-title">Computer Vision</div>
+                    <div class="week-description">
+                        Learn image processing, CNNs, and build visual recognition systems.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Image Processing</li>
+                        <li>CNNs</li>
+                        <li>OpenCV</li>
+                        <li>Image Classification</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week7-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 7</div>
+                    <div class="week-title">Natural Language Processing</div>
+                    <div class="week-description">
+                        Process text data, build chatbots, and understand language models.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Text Processing</li>
+                        <li>Sentiment Analysis</li>
+                        <li>Word Embeddings</li>
+                        <li>Simple Chatbot</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week8-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 8</div>
+                    <div class="week-title">Advanced Deep Learning</div>
+                    <div class="week-description">
+                        Explore RNNs, LSTMs, and sequence-to-sequence models.
+                    </div>
+                    <ul class="week-topics">
+                        <li>RNNs & LSTMs</li>
+                        <li>Seq2Seq Models</li>
+                        <li>Attention Mechanisms</li>
+                        <li>Time Series</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week9-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 9</div>
+                    <div class="week-title">AI in Production</div>
+                    <div class="week-description">
+                        Learn to deploy models, create APIs, and scale AI applications.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Model Deployment</li>
+                        <li>Flask/FastAPI</li>
+                        <li>Cloud Services</li>
+                        <li>MLOps Basics</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week10-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 10</div>
+                    <div class="week-title">Specialized AI Applications</div>
+                    <div class="week-description">
+                        Explore reinforcement learning, GANs, and cutting-edge AI techniques.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Reinforcement Learning</li>
+                        <li>GANs</li>
+                        <li>Transfer Learning</li>
+                        <li>AI Ethics</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week11-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 11</div>
+                    <div class="week-title">Capstone Project</div>
+                    <div class="week-description">
+                        Plan and start building your comprehensive AI project portfolio.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Project Planning</li>
+                        <li>Data Collection</li>
+                        <li>Model Development</li>
+                        <li>Testing & Validation</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+
+                <a href="week12-ai-plan.html" class="week-card">
+                    <div class="week-number">Week 12</div>
+                    <div class="week-title">Portfolio & Career</div>
+                    <div class="week-description">
+                        Complete your project, build your portfolio, and prepare for AI career opportunities.
+                    </div>
+                    <ul class="week-topics">
+                        <li>Project Completion</li>
+                        <li>Portfolio Building</li>
+                        <li>Career Preparation</li>
+                        <li>Next Steps</li>
+                    </ul>
+                    <div class="week-status status-coming-soon">Coming Soon</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>🚀 Ready to start your AI journey?</strong></p>
+            <p>Click on Week 1 to begin your transformation into an AI practitioner!</p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.7;">
+                💡 Tip: Bookmark this page and return regularly to track your progress
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simple progress tracking based on completed weeks
+        function updateProgress() {
+            const completedWeeks = 0; // You can update this as you complete weeks
+            const totalWeeks = 12;
+            const progressPercentage = (completedWeeks / totalWeeks) * 100;
+            
+            document.getElementById('progressFill').style.width = progressPercentage + '%';
+        }
+
+        // Add click tracking and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            
+            // Add hover effects and click tracking
+            const weekCards = document.querySelectorAll('.week-card');
+            weekCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (this.href.includes('week1-ai-plan.html')) {
+                        // Week 1 is available
+                        return true;
+                    } else {
+                        // Other weeks are coming soon
+                        e.preventDefault();
+                        alert('This week is coming soon! Complete Week 1 first.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
