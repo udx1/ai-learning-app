@@ -818,5 +818,159 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Progress tracking functionality
+        class WeekProgressTracker {
+            constructor() {
+                this.completedDays = new Set();
+                this.currentDay = 1;
+                this.totalDays = 7;
+                this.init();
+            }
+
+            init() {
+                this.loadProgress();
+                this.setupEventListeners();
+                this.updateDisplay();
+            }
+
+            setupEventListeners() {
+                const dayMarkers = document.querySelectorAll('.day-marker');
+                dayMarkers.forEach((marker, index) => {
+                    marker.addEventListener('click', () => {
+                        this.toggleDayCompletion(index + 1);
+                    });
+                });
+            }
+
+            toggleDayCompletion(dayNumber) {
+                if (this.completedDays.has(dayNumber)) {
+                    this.completedDays.delete(dayNumber);
+                } else {
+                    this.completedDays.add(dayNumber);
+                }
+                this.saveProgress();
+                this.updateDisplay();
+            }
+
+            updateDisplay() {
+                const dayMarkers = document.querySelectorAll('.day-marker');
+                const progressFill = document.querySelector('.progress-fill');
+                const progressPercentage = document.querySelector('.progress-percentage');
+
+                // Update day markers
+                dayMarkers.forEach((marker, index) => {
+                    const dayNumber = index + 1;
+                    marker.classList.remove('completed', 'current');
+                    
+                    if (this.completedDays.has(dayNumber)) {
+                        marker.classList.add('completed');
+                        const dayNumberEl = marker.querySelector('.day-number');
+                        dayNumberEl.innerHTML = '✓';
+                    } else if (dayNumber === this.currentDay && !this.completedDays.has(dayNumber)) {
+                        marker.classList.add('current');
+                        const dayNumberEl = marker.querySelector('.day-number');
+                        dayNumberEl.innerHTML = dayNumber;
+                    } else {
+                        const dayNumberEl = marker.querySelector('.day-number');
+                        dayNumberEl.innerHTML = dayNumber;
+                    }
+                });
+
+                // Update progress bar
+                const completedCount = this.completedDays.size;
+                const progressPercent = (completedCount / this.totalDays) * 100;
+                progressFill.style.width = progressPercent + '%';
+                progressPercentage.textContent = `${completedCount}/${this.totalDays} Days`;
+
+                // Update current day for next incomplete day
+                this.updateCurrentDay();
+            }
+
+            updateCurrentDay() {
+                for (let i = 1; i <= this.totalDays; i++) {
+                    if (!this.completedDays.has(i)) {
+                        this.currentDay = i;
+                        break;
+                    }
+                }
+                // If all days are completed, keep current day as last day
+                if (this.completedDays.size === this.totalDays) {
+                    this.currentDay = this.totalDays;
+                }
+            }
+
+            saveProgress() {
+                // Save to memory (since localStorage is not available)
+                window.weekProgress = {
+                    completedDays: Array.from(this.completedDays),
+                    currentDay: this.currentDay
+                };
+            }
+
+            loadProgress() {
+                // Load from memory
+                if (window.weekProgress) {
+                    this.completedDays = new Set(window.weekProgress.completedDays);
+                    this.currentDay = window.weekProgress.currentDay;
+                }
+            }
+
+            // Method to mark a specific day as completed (for external use)
+            markDayCompleted(dayNumber) {
+                if (dayNumber >= 1 && dayNumber <= this.totalDays) {
+                    this.completedDays.add(dayNumber);
+                    this.saveProgress();
+                    this.updateDisplay();
+                }
+            }
+
+            // Method to reset all progress
+            resetProgress() {
+                this.completedDays.clear();
+                this.currentDay = 1;
+                this.saveProgress();
+                this.updateDisplay();
+            }
+
+            // Method to get current progress
+            getProgress() {
+                return {
+                    completedDays: Array.from(this.completedDays),
+                    currentDay: this.currentDay,
+                    completedCount: this.completedDays.size,
+                    totalDays: this.totalDays,
+                    percentageComplete: (this.completedDays.size / this.totalDays) * 100
+                };
+            }
+        }
+
+        // Initialize progress tracker when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            window.progressTracker = new WeekProgressTracker();
+            
+            // Add some helpful instructions
+            const progressContainer = document.querySelector('.progress-container');
+            const instructions = document.createElement('div');
+            instructions.style.cssText = `
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 0.9rem;
+                text-align: center;
+                margin-top: 1rem;
+                font-style: italic;
+            `;
+            instructions.textContent = 'Click on day markers to mark them as completed';
+            progressContainer.appendChild(instructions);
+        });
+
+        // Optional: Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key >= '1' && e.key <= '7') {
+                const dayNumber = parseInt(e.key);
+                window.progressTracker.toggleDayCompletion(dayNumber);
+            }
+        });
+    </script>
 </body>
 </html>
