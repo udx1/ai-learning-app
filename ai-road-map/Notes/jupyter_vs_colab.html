@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupyter Notebook vs Google Colab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #2c3e50;
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 6px;
+            padding: 25px;
+            border: 1px solid #e0e0e0;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .tool-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .tool-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .tag-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            background-color: #e9ecef;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .differences {
+            margin-top: 40px;
+        }
+
+        .differences h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .difference-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #2c3e50;
+        }
+
+        .difference-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .difference-item p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .difference-item strong {
+            color: #2c3e50;
+        }
+
+        .conclusion {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #2c3e50;
+            border-radius: 6px;
+            color: white;
+            text-align: center;
+        }
+
+        .conclusion h3 {
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .conclusion p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Jupyter Notebook vs Google Colab</h1>
+            <p>A professional comparison of interactive computing environments</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Both Jupyter Notebook and Google Colab are interactive computing environments that allow you to create documents containing live code, equations, visualizations, and narrative text. However, they differ significantly in their approach, setup, and capabilities.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="tool-card">
+                    <h3>Jupyter Notebook</h3>
+                    <p>An open-source web application that runs locally on your computer. You have complete control over your environment, packages, and computational resources.</p>
+                    <div class="tag-container">
+                        <span class="tag">Local Installation</span>
+                        <span class="tag">Full Control</span>
+                        <span class="tag">No Time Limits</span>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h3>Google Colab</h3>
+                    <p>Google's cloud-based version of Jupyter notebooks that runs entirely in your browser with free access to powerful computing resources including GPUs and TPUs.</p>
+                    <div class="tag-container">
+                        <span class="tag">Cloud-Based</span>
+                        <span class="tag">Free GPU Access</span>
+                        <span class="tag">Easy Sharing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Jupyter Notebook</th>
+                            <th>Google Colab</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Setup</strong></td>
+                            <td>Requires local installation</td>
+                            <td>No installation needed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Computing Resources</strong></td>
+                            <td>Limited to local machine</td>
+                            <td>Free cloud GPU/TPU access</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Collaboration</strong></td>
+                            <td>Manual sharing required</td>
+                            <td>Real-time collaboration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Storage</strong></td>
+                            <td>Local file system</td>
+                            <td>Google Drive integration</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Package Management</strong></td>
+                            <td>Manual installation</td>
+                            <td>Pre-installed libraries</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Session Limits</strong></td>
+                            <td>No time restrictions</td>
+                            <td>12-hour session limit</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="differences">
+                <h2>Key Differences</h2>
+
+                <div class="difference-item">
+                    <h4>Setup and Access</h4>
+                    <p><strong>Jupyter:</strong> Requires Python and Jupyter installation on your local machine, but gives you full control over your environment.</p>
+                    <p><strong>Colab:</strong> No installation needed - accessible from any device with internet access through a web browser.</p>
+                </div>
+
+                <div class="difference-item">
+                    <h4>Computing Resources</h4>
+                    <p><strong>Jupyter:</strong> Limited to your local machine's CPU, memory, and storage resources.</p>
+                    <p><strong>Colab:</strong> Provides free access to powerful cloud hardware including GPUs and TPUs for machine learning tasks.</p>
+                </div>
+
+                <div class="difference-item">
+                    <h4>Collaboration and Sharing</h4>
+                    <p><strong>Jupyter:</strong> Requires manual sharing of notebook files and additional tools for real-time collaboration.</p>
+                    <p><strong>Colab:</strong> Built-in sharing and real-time collaboration features similar to Google Docs.</p>
+                </div>
+
+                <div class="difference-item">
+                    <h4>Data Persistence</h4>
+                    <p><strong>Jupyter:</strong> All files, data, and outputs are stored locally on your machine with full persistence.</p>
+                    <p><strong>Colab:</strong> Notebooks are saved to Google Drive, but runtime data may be lost when sessions end.</p>
+                </div>
+
+                <div class="difference-item">
+                    <h4>Package Management</h4>
+                    <p><strong>Jupyter:</strong> You manage your own Python environment and package installations using pip or conda.</p>
+                    <p><strong>Colab:</strong> Comes pre-installed with popular data science libraries, with easy installation of additional packages.</p>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h3>Which Should You Choose?</h3>
+                <p><strong>Choose Jupyter Notebook</strong> for production work, sensitive data projects, or when you need full control over your computing environment and have no time constraints.</p>
+                <p><strong>Choose Google Colab</strong> for learning, experimentation, quick prototyping, and when you need powerful hardware without setup complexity or want easy collaboration.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
